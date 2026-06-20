@@ -3,7 +3,7 @@ import os
 import warnings
 from abc import ABC, abstractmethod
 from collections.abc import Coroutine
-from typing import Any, List, TypeVar, Union
+from typing import List, TypeVar, Union
 
 import numpy as np
 from pydantic import BaseModel, Field
@@ -17,6 +17,7 @@ T = TypeVar("T")
 class EmbedderConfig(BaseModel):
     embedding_model: str
     embedding_dim: int = Field(default=EMBEDDING_DIM, frozen=True)
+
 
 # Use this instead of asyncio.gather() to bound coroutines
 async def semaphore_gather(
@@ -78,7 +79,7 @@ def normalize_embedding(
         raise ValueError("Input must be a 1D or 2D array/list of lists.")
 
 
-ConfigType = TypeVar('ConfigType', bound=EmbedderConfig)
+ConfigType = TypeVar("ConfigType", bound=EmbedderConfig)
 
 
 class AbstractEmbeddingModel(ABC):

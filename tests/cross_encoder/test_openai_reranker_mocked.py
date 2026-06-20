@@ -145,7 +145,8 @@ async def test_rank_success(
     ) as mock_sem_gather:
         # This makes semaphore_gather immediately await and return results of the coroutines
         async def serial_gather(  # type: ignore
-            *coros: Coroutine, max_coroutines: int = SEMAPHORE_LIMIT  # type: ignore
+            *coros: Coroutine,
+            max_coroutines: int = SEMAPHORE_LIMIT,  # type: ignore
         ):
             results = []
             for coro in coros:
@@ -240,7 +241,8 @@ async def test_rank_response_missing_logprobs(
     ) as mock_sem_gather:
 
         async def serial_gather(  # type: ignore
-            *coros: Coroutine, max_coroutines: int = SEMAPHORE_LIMIT  # type: ignore
+            *coros: Coroutine,
+            max_coroutines: int = SEMAPHORE_LIMIT,  # type: ignore
         ):
             results = []
             for coro in coros:

@@ -120,9 +120,9 @@ def test_resize_batch_embeddings(
     # The third one was not resized itself, but because others were, it gets normalized as part of the batch.
     # This is because needs_normalization flag is set if ANY embedding is resized.
     for res_emb in resized_batch:
-        assert np.isclose(
-            np.linalg.norm(res_emb), 1.0
-        ), f"Embedding {res_emb} not normalized"
+        assert np.isclose(np.linalg.norm(res_emb), 1.0), (
+            f"Embedding {res_emb} not normalized"
+        )
 
     expected_0_norm = normalize_embedding([1.0, 2.0, 3.0])
     expected_1_norm = normalize_embedding([1.0, 2.0, 0.0])
@@ -186,6 +186,6 @@ async def test_st_get_batch_embedding_real_model(
             res_emb
         )  # Ensure it's a NumPy array for norm calculation
         norm = np.linalg.norm(embedding_array)
-        assert np.isclose(
-            norm, 1.0
-        ), f"Embedding norm is {norm}, not 1.0. Embedding: {res_emb}"
+        assert np.isclose(norm, 1.0), (
+            f"Embedding norm is {norm}, not 1.0. Embedding: {res_emb}"
+        )

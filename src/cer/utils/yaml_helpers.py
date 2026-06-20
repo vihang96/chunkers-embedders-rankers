@@ -4,7 +4,7 @@ import yaml
 from pydantic import BaseModel, ValidationError
 
 # Define a TypeVar for generic Pydantic models
-T = TypeVar('T', bound=BaseModel)
+T = TypeVar("T", bound=BaseModel)
 
 
 def validate_yaml_string(yaml_string: str) -> bool:
@@ -80,13 +80,13 @@ def convert_pydantic_to_yaml(model_instance: BaseModel, **kwargs: Any) -> str:
     """
     # Convert Pydantic model to a dictionary suitable for YAML serialization
     # Use model_dump for Pydantic V2, mode='json' handles complex types like Enums
-    data = model_instance.model_dump(mode='json')
+    data = model_instance.model_dump(mode="json")
 
     # Default YAML dump settings
     dump_options = {
-        'sort_keys': False,
-        'default_flow_style': False,
-        'allow_unicode': True,
+        "sort_keys": False,
+        "default_flow_style": False,
+        "allow_unicode": True,
     }
     # Update with any user-provided kwargs
     dump_options.update(kwargs)
@@ -120,13 +120,13 @@ def convert_pydantic_to_yaml_selective(
         # For now, let's return an empty YAML mapping
         data = {}
     else:
-        data = model_instance.model_dump(include=set(fields), mode='json')
+        data = model_instance.model_dump(include=set(fields), mode="json")
 
     # Default YAML dump settings
     dump_options = {
-        'sort_keys': False,
-        'default_flow_style': False,
-        'allow_unicode': True,
+        "sort_keys": False,
+        "default_flow_style": False,
+        "allow_unicode": True,
     }
     # Update with any user-provided kwargs
     dump_options.update(kwargs)

@@ -111,9 +111,9 @@ async def test_embedding_retriever_initialization(
         model_class=ToolSchema,
         embedder_func=mock_embedder_func,
     )
-    assert (
-        retriever.tool_embeddings_matrix.size > 0
-    ), "Tool embeddings matrix should not be empty"
+    assert retriever.tool_embeddings_matrix.size > 0, (
+        "Tool embeddings matrix should not be empty"
+    )
     # Expect 3 tools with valid embeddings from the fixture
     assert retriever.tool_embeddings_matrix.shape[0] == 3
     assert retriever.tool_embeddings_matrix.shape[1] == 5  # Dimension of embeddings

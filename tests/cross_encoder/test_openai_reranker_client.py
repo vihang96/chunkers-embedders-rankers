@@ -49,9 +49,9 @@ async def test_openai_reranker_client_integration() -> None:
         pytest.fail(f"OpenAIRerankerClient().rank() raised an exception: {e}")
         return
 
-    assert len(ranked_results) == len(
-        passages
-    ), "Number of ranked results should match input passages"
+    assert len(ranked_results) == len(passages), (
+        "Number of ranked results should match input passages"
+    )
 
     found_relevant = False
     found_irrelevant = False
@@ -59,13 +59,13 @@ async def test_openai_reranker_client_integration() -> None:
     score_irrelevant = -1.0
 
     for i, (passage_text, score) in enumerate(ranked_results):
-        assert isinstance(
-            passage_text, str
-        ), f"Passage text at index {i} is not a string."
+        assert isinstance(passage_text, str), (
+            f"Passage text at index {i} is not a string."
+        )
         assert isinstance(score, float), f"Score at index {i} is not a float."
-        assert (
-            0.0 <= score <= 1.0
-        ), f"Score at index {i} ({score}) is not between 0 and 1."
+        assert 0.0 <= score <= 1.0, (
+            f"Score at index {i} ({score}) is not between 0 and 1."
+        )
 
         if passage_text == passage_relevant:
             found_relevant = True
@@ -75,16 +75,16 @@ async def test_openai_reranker_client_integration() -> None:
             score_irrelevant = score
 
         # Check that the original passage objects are returned (not modified)
-        assert (
-            passage_text in passages
-        ), f"Ranked passage '{passage_text}' not in original passages."
+        assert passage_text in passages, (
+            f"Ranked passage '{passage_text}' not in original passages."
+        )
 
-    assert (
-        found_relevant
-    ), f"The highly relevant passage was not found in the results: '{passage_relevant}'"
-    assert (
-        found_irrelevant
-    ), f"The clearly irrelevant passage was not found in the results: '{passage_irrelevant}'"
+    assert found_relevant, (
+        f"The highly relevant passage was not found in the results: '{passage_relevant}'"
+    )
+    assert found_irrelevant, (
+        f"The clearly irrelevant passage was not found in the results: '{passage_irrelevant}'"
+    )
 
     # The core assertion: relevant passage should have a higher score than irrelevant one.
     # We also expect the relevant passage to be ranked higher (appear earlier in the sorted list).
@@ -105,21 +105,21 @@ async def test_openai_reranker_client_integration() -> None:
             f"Irrelevant passage not found in ranked results: {passage_irrelevant}"
         )
 
-    assert (
-        score_relevant > score_irrelevant
-    ), f"Relevant passage score ({score_relevant}) should be greater than irrelevant passage score ({score_irrelevant})."
+    assert score_relevant > score_irrelevant, (
+        f"Relevant passage score ({score_relevant}) should be greater than irrelevant passage score ({score_irrelevant})."
+    )
 
-    assert (
-        index_relevant < index_irrelevant
-    ), f"Relevant passage (ranked at {index_relevant}) should appear before irrelevant passage (ranked at {index_irrelevant})."
+    assert index_relevant < index_irrelevant, (
+        f"Relevant passage (ranked at {index_relevant}) should appear before irrelevant passage (ranked at {index_irrelevant})."
+    )
 
     # Check if somewhat_relevant passage is also present
     found_somewhat_relevant = any(
         p_text == passage_somewhat_relevant for p_text, _ in ranked_results
     )
-    assert (
-        found_somewhat_relevant
-    ), f"The somewhat relevant passage was not found in the results: '{passage_somewhat_relevant}'"
+    assert found_somewhat_relevant, (
+        f"The somewhat relevant passage was not found in the results: '{passage_somewhat_relevant}'"
+    )
 
     # Optional: Check if somewhat_relevant is ranked between relevant and irrelevant, or at least below relevant
     # This can be flaky depending on the model's interpretation.

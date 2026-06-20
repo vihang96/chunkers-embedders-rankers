@@ -6,7 +6,10 @@ import numpy as np
 import tiktoken
 
 from ..utils.schemas import PydanticModel
-from ..utils.yaml_helpers import convert_pydantic_to_yaml, convert_pydantic_to_yaml_selective
+from ..utils.yaml_helpers import (
+    convert_pydantic_to_yaml,
+    convert_pydantic_to_yaml_selective,
+)
 from .client import AbstractEmbeddingModel
 
 # Optional backends: only available when the matching extra is installed. We keep

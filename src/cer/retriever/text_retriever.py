@@ -206,11 +206,11 @@ class BM25Retriever(RetrieverClient[PydanticModel]):  # Made generic
             List of PydanticModel objects
         """
         try:
-            scored_candidates: List[
-                Tuple[float, PydanticModel]
-            ] = self._get_scored_bm25_candidates_for_query_sync(
-                query_text,
-                initial_candidates_for_rerank_per_query,
+            scored_candidates: List[Tuple[float, PydanticModel]] = (
+                self._get_scored_bm25_candidates_for_query_sync(
+                    query_text,
+                    initial_candidates_for_rerank_per_query,
+                )
             )
 
             tools_to_rerank_for_query: List[PydanticModel] = [

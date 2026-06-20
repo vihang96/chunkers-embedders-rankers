@@ -178,9 +178,7 @@ class HybridRetriever(RetrieverClient[PydanticModel]):
             if len(final_retrieved_tools) >= limit:
                 break  # Overall limit reached
 
-            for (
-                tool_model
-            ) in (
+            for tool_model in (
                 tools_from_one_query
             ):  # tools_from_one_query is already limited by budget_per_query
                 if len(final_retrieved_tools) >= limit:

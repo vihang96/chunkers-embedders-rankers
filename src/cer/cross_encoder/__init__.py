@@ -7,11 +7,11 @@ from .client import CrossEncoderClient
 from .rrf_reranker_client import RRFRerankerClient
 
 __all__ = [
-    'CrossEncoderClient',
-    'RRFRerankerClient',
-    'create_openai_reranker_wrapper',
-    'create_bge_reranker_wrapper',
-    'get_reranked_objects',
+    "CrossEncoderClient",
+    "RRFRerankerClient",
+    "create_openai_reranker_wrapper",
+    "create_bge_reranker_wrapper",
+    "get_reranked_objects",
 ]
 
 # Optional backends. cer[local] for BGE, cer[openai] for the OpenAI reranker.
@@ -20,11 +20,11 @@ try:
 except ImportError:
     pass
 else:
-    __all__ += ['BGERerankerClient']
+    __all__ += ["BGERerankerClient"]
 
 try:
     from .openai_reranker_client import LLMConfig, OpenAIRerankerClient
 except ImportError:
     pass
 else:
-    __all__ += ['OpenAIRerankerClient', 'LLMConfig']
+    __all__ += ["OpenAIRerankerClient", "LLMConfig"]

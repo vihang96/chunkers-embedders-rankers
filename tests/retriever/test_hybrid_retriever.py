@@ -168,14 +168,14 @@ async def test_hybrid_retriever_rrf(dummy_file_path_hybrid: str) -> None:
     if results:
         for i, model_item in enumerate(results):
             print(
-                f"  {i+1}. {model_item.procedure} (Desc: {model_item.description[:30]}...)"
+                f"  {i + 1}. {model_item.procedure} (Desc: {model_item.description[:30]}...)"
             )
     else:
         print("  No models found after RRF and final re-ranking.")
 
-    assert (
-        len(results) <= test_limit
-    ), f"Expected max {test_limit} results, got {len(results)}"
+    assert len(results) <= test_limit, (
+        f"Expected max {test_limit} results, got {len(results)}"
+    )
     if results:  # Check if results is not empty before accessing elements
         assert (
             results[0].procedure == "MeetingScheduler"
@@ -234,9 +234,9 @@ async def test_retrieve_ordered_ranked(dummy_file_path_hybrid: str) -> None:
     # Add more specific assertions based on expected behavior of retrieve_ordered_ranked
     # For example, check uniqueness if fuse_tools_by_field is used
     procedures = [r.procedure for r in results]
-    assert len(procedures) == len(
-        set(procedures)
-    ), "Expected unique procedures in ordered ranked results"
+    assert len(procedures) == len(set(procedures)), (
+        "Expected unique procedures in ordered ranked results"
+    )
 
     # Test with budget_per_query
     results_budgeted = await retriever.retrieve_ordered_ranked(
